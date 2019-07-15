@@ -1,0 +1,47 @@
+{% load tz %}
+<form action="" method="post"> {% csrf_token %}
+    <label for="name">Name</label>
+    <input type="text" id="name" name='name' value="{{ edit_data.name }}">
+    <label for="mobile">Mobile</label>
+    <input type="text" id="mobile" name="mobile" value="{{ edit_data.mobile }}">
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" value="{{ edit_data.email }}">
+    <input type="submit" value="Submit">
+</form>
+
+
+<hr color="black">
+
+<table>
+    <tr>
+        <th>S.no</th>
+        <th>Name</th>
+        <th>Mobile</th>
+        <th>Email</th>
+        <th>Created_on</th>
+        <th>Edit</th>
+    </tr>
+{% for item in contact_list %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.mobile }}</td>
+        <td>{{ item.email }}</td>
+        <td>
+            {% timezone "Asia/Kolkata" %}
+            {{ item.created}}
+            {% endtimezone %}
+        </td>
+        <td>
+        <a href="{% url 'c_form_edit' item.id %}"> edit </a>
+        </td>
+        <td>
+        <a href="{% url 'c_form_delete' item.id %}"> delete </a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<hr color="black">
+<a href="{%url 'c_home' %}">Back</a>

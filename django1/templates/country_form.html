@@ -1,0 +1,16 @@
+<form action="" method="POST"> {%csrf_token%}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+<hr>
+
+
+{% for item in country_list %}
+    {{item.name}} - {{item.capital}} - {{item.population}} - {{item.sea}} = {{item.currency}}
+    <hr>
+{% endfor %}
+
+
+<a href="{%url 'c_home' %}">Back</a>
+
